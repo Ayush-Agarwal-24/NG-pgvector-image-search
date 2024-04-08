@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload Images</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <h2>Upload Dataset</h2>
+    {% if request.query_params["message"] %}
+    <div class="alert alert-success" role="alert">
+        {{ request.query_params["message"] }}
+    </div>
+    {% endif %}
+    <form action="/upload_input_data/" enctype="multipart/form-data" method="post" class="mb-3">
+        <div class="custom-file">
+            <input name="files" type="file" multiple class="custom-file-input" id="customFile">
+            <label class="custom-file-label" for="customFile">Choose file</label>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Upload</button>
+    </form>
+    <h2>Search Images</h2>
+    <form action="/search_embedding/" enctype="multipart/form-data" method="post">
+        <div class="custom-file">
+            <input name="file" type="file" class="custom-file-input" id="customFileSearch">
+            <label class="custom-file-label" for="customFileSearch">Choose file</label>
+        </div>
+        <button type="submit" class="btn btn-success mt-3">Search</button>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script>
+    $(".custom-file-input").on("change", function() {
+      var fileName = $(this).val().split("\\").pop();
+      $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+    </<script>
+</script>
+</body>
+</html>
